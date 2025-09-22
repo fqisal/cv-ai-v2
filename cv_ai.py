@@ -40,10 +40,20 @@ def analyze_cv(cv_text, required_keywords):
     else:
         status = "Rejected"
     
+    # ⬇️⬇️⬇️ الكود الجديد - إضافة الأولوية ⬇️⬇️⬇️
+    if score >= 80:
+        priority = "High"
+    elif score >= 60:
+        priority = "Medium"
+    else:
+        priority = "Low"
+    
+    
     return {
         "matches": matches,
         "score": round(score, 2),
         "status": status,
+        "priority": priority,  # ⬅️ الجديد
         "matched_count": matched_count,
         "total_keywords": total_keywords
     }
@@ -63,5 +73,4 @@ def test():
     return jsonify({"message": "AI is working! 🚀", "status": "active"})
 
 if __name__ == '__main__':
-
     app.run(debug=True, host='0.0.0.0', port=5000)
